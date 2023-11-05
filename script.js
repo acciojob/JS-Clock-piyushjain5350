@@ -1,23 +1,31 @@
-const secondHand = document.querySelector('.second-hand');
+//your code here
+const secondsHand = document.querySelector('.second-hand');
 const minsHand = document.querySelector('.min-hand');
 const hourHand = document.querySelector('.hour-hand');
 
-function setDate() {
+function setTime() {
+	// getting the whole date including time 
     const now = new Date();
-
+    
+// extracting time from the date 
     const seconds = now.getSeconds();
-    const secondsDegrees = ((seconds / 60) * 360) + 90;
-    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-
     const mins = now.getMinutes();
-    const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
-    minsHand.style.transform = `rotate(${minsDegrees}deg)`;
-
+	
     const hour = now.getHours();
-    const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
-    hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+  console.log("cur",hour, mins, seconds)
+	// setting time into degree to rotate hand to 
+	//  5:30:20
+	// 5*30 + 30/2 = 165min
+	const hourDegrees = (30*hour)+mins/2;
+	const minDegree =6*mins;
+	const secondDegree =6*seconds;
+  console.log("Degrees",hourDegrees, minDegree, secondDegree)
+
+	// hourHand.addEventListener()
+	hourHand.style.transform = `rotate(${hourDegrees +90 }deg)`
+	minsHand.style.transform = `rotate(${minDegree +90}deg)`
+	secondsHand.style.transform = `rotate(${secondDegree +90}deg)`
+	
 }
 
-setInterval(setDate, 1000);
-
-setDate();
+setInterval(setTime, 1000)
